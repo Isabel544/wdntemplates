@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="color-scheme" content="dark light">
+        <title>Toggle Buttons</title>
+        <link rel="stylesheet" href="/wdn/templates_6.0/css/critical.css">
+        <link rel="stylesheet" href="/wdn/templates_6.0/css/main.css">
+        <script src="/wdn/templates_6.0/js/head-2.js"></script>
+    </head>
+    <body class="unl">
+        <main>
+            <h1>Profile Toggle</h1>
+            <form class="dcf-form" action="?" method="post">
+                <fieldset>
+                    <div class="dcf-form-group">
+                        <label for="helpful_comments">Comments</label>
+                        <textarea id="helpful_comments" cols="60" rows="5"></textarea>
+                    </div>
+
+                    <div class="dcf-form-group">
+                        <button
+                            class="dcf-profile-toggle dcf-btn dcf-btn-primary"
+                            data-controls="profile-toggle-div"
+                            data-label-on="Open Profile Toggle Div"
+                            data-label-off="Close Profile Toggle Div"
+                            data-start-expanded="false"
+                        >
+                            Required If Toggled
+
+                        </button>
+                        <fieldset id="profile-toggle-div">
+                            <legend>Required Content</legend>            
+                            <div class="dcf-form-group">
+                                <label for="name">
+                                    Name 
+                                    <small class="dcf-required">Required</small>
+                                </label>
+                                <input id="name" type="text" data-required="true" >
+                            </div>          
+                            
+                            <fieldset class="dcf-form-group dcf-d-flex dcf-flex-col">
+                                <legend class="dcf-legend">Checkboxes</legend>
+                                <div class="dcf-input-checkbox">
+                                    <input id="elements-form-checkboxA" type="checkbox"                             value="0" aria-labelledby="elements-form-checkboxA-label">
+                                    <label for="elements-form-checkboxA"                            id="elements-form-checkboxA-label">Checkbox A</label>
+                                </div>
+                                <div class="dcf-input-checkbox">
+                                    <input id="elements-form-checkboxB" type="checkbox"                             
+                                    value="1" aria-labelledby="elements-form-checkboxB-label"                           disabled="">
+                                    <label for="elements-form-checkboxB"                            id="elements-form-checkboxB-label">Checkbox B</label>
+                                </div>
+                                <div class="dcf-input-checkbox">
+                                    <input id="elements-form-checkboxC" type="checkbox"                             
+                                    value="2" aria-labelledby="elements-form-checkboxC-label">
+                                    <label for="elements-form-checkboxC"                            id="elements-form-checkboxC-label">Checkbox C</label>
+                                </div>
+                            </fieldset>
+
+
+
+                        </fieldset>
+                    </div>
+                </fieldset>
+                <input class="dcf-btn dcf-btn-primary" name="submit" type="submit" value="Submit">
+            </form>
+            *Note: Submission is possible without filling in required fields 
+            as long as toggle is not in expanded form
+        </main>
+
+
+
+        <script>
+            document.getElementById('my-div').addEventListener('toggleButtonReady', (e) => {
+                console.log('Event Name: toggleButtonReady', e);
+            });
+            document.addEventListener('UNLPluginInitialized', (e) => {
+                console.log('Event Name: UNLPluginInitialized', e);
+            });
+            document.addEventListener('UNLPluginLoadedElement', (e) => {
+                console.log('Event Name: UNLPluginLoadedElement', e);
+            });
+            window.UNL.autoLoader.config.plugins.UNLToggleButton.onPluginLoadedElement = (loaded_element) => {
+                console.log('Auto Loader onPluginLoadedElement:', loaded_element);
+            }
+        </script>
+        
+        <script src="/wdn/templates_6.0/js/auto-loader.js" type="module"></script>
+
+<script>
+document.querySelector('form').addEventListener('submit', function (e) {
+    const form = e.target;
+    const toggleSection = document.getElementById('profile-toggle-div');
+
+    // Detect whether toggle is open
+    const isOpen = toggleSection.hasAttribute('data-expanded') 
+        ? toggleSection.getAttribute('data-expanded') === 'true'
+        : !toggleSection.hidden;
+
+    // Get all inputs that use data-required
+    const toggleInputs = toggleSection.querySelectorAll('[data-required="true"]');
+
+    if (isOpen) {
+        // Make them required when visible
+        toggleInputs.forEach(input => {
+            input.setAttribute('required', '');
+        });
+    } else {
+        // Remove required when hidden
+        toggleInputs.forEach(input => {
+            input.removeAttribute('required');
+        });
+    }
+
+    // Validate form
+    console.log(form.checkValidity());
+    if (!form.checkValidity()) {
+        e.preventDefault();
+        form.reportValidity();
+    } else {
+        alert('Success! Form submitted.');
+    }
+});
+</script>
+    </body>
+</html>
