@@ -106,42 +106,69 @@
         <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.querySelector('form');
-            const toggleSection = document.getElementById('profile-toggle-div');
         
-            // Keep required + data-required in sync with data-expanded
-            function updateRequiredFromState() {
-                const isOpen = toggleSection.getAttribute('data-expanded') === 'true';
-                const inputs = toggleSection.querySelectorAll('[data-required]');
+            // Store all toggle ids are stored
+            const toggleSections = {};
+            const toggleButtons = document.querySelectorAll('.dcf-profile-toggle');
+        
+            toggleButtons.forEach(button => {
+                const targetId = button.dataset.controls;
+                const section = document.getElementById(targetId);
+            
+                toggleSections[targetId] = section;
+
+                if (!section.hasAttribute('data-expanded')) {
+                    section.setAttribute('data-expanded', 'false');
+                }
+
+                section.addEventListener('toggleElementOn', () => {
+                    section.setAttribute('data-expanded', 'true');
+                    updateSection(section);
+                });
+            
+                section.addEventListener('toggleElementOff', () => {
+                    section.setAttribute('data-expanded', 'false');
+                    clearSection(section); // important difference
+                });
+            });
+        
+            // Attach required attributes without intefering with nested ones
+            function updateSection(section) {
+                const inputs = section.querySelectorAll('[data-required]');
             
                 inputs.forEach(input => {
-                    input.setAttribute('data-required', isOpen ? 'true' : 'false');
+                    const parentToggle = input.closest('fieldset[id]');
+                    if (parentToggle !== section) return;
                 
-                    if (isOpen) {
-                        input.setAttribute('required', '');
-                    } else {
-                        input.removeAttribute('required');
-                    }
+                    input.setAttribute('data-required', 'true');
+                    input.setAttribute('required', '');
                 });
             }
         
-            toggleSection.addEventListener('toggleElementOn', () => {
-                toggleSection.setAttribute('data-expanded', 'true');
-                updateRequiredFromState();
-            });
-        
-            toggleSection.addEventListener('toggleElementOff', () => {
-                toggleSection.setAttribute('data-expanded', 'false');
-                updateRequiredFromState();
-            });
-        
-            if (!toggleSection.hasAttribute('data-expanded')) {
-                toggleSection.setAttribute('data-expanded', 'false');
+            // Remove required attribute from everything when parent is closed
+            function clearSection(section) {
+                const inputs = section.querySelectorAll('[data-required]');
+            
+                inputs.forEach(input => {
+                    input.setAttribute('data-required', 'false');
+                    input.removeAttribute('required');
+                });
+            
+                const nestedSections = section.querySelectorAll('fieldset[id]');
+                nestedSections.forEach(nested => {
+                    nested.setAttribute('data-expanded', 'false');
+                });
             }
-            updateRequiredFromState();
+
+            Object.values(toggleSections).forEach(section => {
+                if (section.getAttribute('data-expanded') === 'true') {
+                    updateSection(section);
+                } else {
+                    clearSection(section);
+                }
+            });
         
             form.addEventListener('submit', function (e) {
-                updateRequiredFromState(); // ensure latest state before validating
-            
                 if (!form.checkValidity()) {
                     e.preventDefault();
                     form.reportValidity();
