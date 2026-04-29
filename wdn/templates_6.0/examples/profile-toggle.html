@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="color-scheme" content="dark light">
-        <title>Toggle Buttons</title>
+        <title>Profile Toggle Buttons</title>
         <link rel="stylesheet" href="/wdn/templates_6.0/css/critical.css">
         <link rel="stylesheet" href="/wdn/templates_6.0/css/main.css">
         <script src="/wdn/templates_6.0/js/head-2.js"></script>
@@ -28,7 +28,6 @@
                             data-start-expanded="false"
                         >
                             Required If Toggled
-
                         </button>
                         <fieldset id="profile-toggle-div">
                             <legend>Required Content</legend>            
@@ -37,7 +36,7 @@
                                     Name 
                                     <small class="dcf-required">Required</small>
                                 </label>
-                                <input id="name" type="text" data-required="true" >
+                                <input id="name" type="text" data-required="false" >
                             </div>          
                             
                             <fieldset class="dcf-form-group dcf-d-flex dcf-flex-col">
@@ -58,7 +57,25 @@
                                 </div>
                             </fieldset>
 
-
+                            <button
+                                class="dcf-profile-toggle dcf-btn dcf-btn-primary"
+                                data-controls="nested-profile-toggle-div"
+                                data-label-on="Open Profile Toggle Div"
+                                data-label-off="Close Profile Toggle Div"
+                                data-start-expanded="false"
+                            >
+                                Required If Toggled 2
+                            </button>
+                            <fieldset id="nested-profile-toggle-div">
+                                <legend>Required Nested Content</legend>            
+                                <div class="dcf-form-group">
+                                    <label for="email">
+                                        Email 
+                                        <small class="dcf-required">Required</small>
+                                    </label>
+                                    <input id="email" type="email" data-required="false" >
+                                </div>
+                            </fieldset>
 
                         </fieldset>
                     </div>
@@ -69,59 +86,70 @@
             as long as toggle is not in expanded form
         </main>
 
-
-
         <script>
-            document.getElementById('my-div').addEventListener('toggleButtonReady', (e) => {
-                console.log('Event Name: toggleButtonReady', e);
-            });
-            document.addEventListener('UNLPluginInitialized', (e) => {
-                console.log('Event Name: UNLPluginInitialized', e);
-            });
-            document.addEventListener('UNLPluginLoadedElement', (e) => {
-                console.log('Event Name: UNLPluginLoadedElement', e);
-            });
-            window.UNL.autoLoader.config.plugins.UNLToggleButton.onPluginLoadedElement = (loaded_element) => {
-                console.log('Auto Loader onPluginLoadedElement:', loaded_element);
-            }
+        document.getElementById('profile-toggle-div').addEventListener('toggleProfileReady', (e) => {
+            console.log('Event Name: toggleProfileReady', e);
+        });
+        document.addEventListener('UNLPluginInitialized', (e) => {
+            console.log('Event Name: UNLPluginInitialized', e);
+        });
+        document.addEventListener('UNLPluginLoadedElement', (e) => {
+            console.log('Event Name: UNLPluginLoadedElement', e);
+        });
+        window.UNL.autoLoader.config.plugins.UNLToggleProfile.onPluginLoadedElement = (loaded_element) => {
+            console.log('Auto Loader onPluginLoadedElement:', loaded_element);
+        }
         </script>
         
         <script src="/wdn/templates_6.0/js/auto-loader.js" type="module"></script>
 
-<script>
-document.querySelector('form').addEventListener('submit', function (e) {
-    const form = e.target;
-    const toggleSection = document.getElementById('profile-toggle-div');
-
-    // Detect whether toggle is open
-    const isOpen = toggleSection.hasAttribute('data-expanded') 
-        ? toggleSection.getAttribute('data-expanded') === 'true'
-        : !toggleSection.hidden;
-
-    // Get all inputs that use data-required
-    const toggleInputs = toggleSection.querySelectorAll('[data-required="true"]');
-
-    if (isOpen) {
-        // Make them required when visible
-        toggleInputs.forEach(input => {
-            input.setAttribute('required', '');
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const toggleSection = document.getElementById('profile-toggle-div');
+        
+            // Keep required + data-required in sync with data-expanded
+            function updateRequiredFromState() {
+                const isOpen = toggleSection.getAttribute('data-expanded') === 'true';
+                const inputs = toggleSection.querySelectorAll('[data-required]');
+            
+                inputs.forEach(input => {
+                    input.setAttribute('data-required', isOpen ? 'true' : 'false');
+                
+                    if (isOpen) {
+                        input.setAttribute('required', '');
+                    } else {
+                        input.removeAttribute('required');
+                    }
+                });
+            }
+        
+            toggleSection.addEventListener('toggleElementOn', () => {
+                toggleSection.setAttribute('data-expanded', 'true');
+                updateRequiredFromState();
+            });
+        
+            toggleSection.addEventListener('toggleElementOff', () => {
+                toggleSection.setAttribute('data-expanded', 'false');
+                updateRequiredFromState();
+            });
+        
+            if (!toggleSection.hasAttribute('data-expanded')) {
+                toggleSection.setAttribute('data-expanded', 'false');
+            }
+            updateRequiredFromState();
+        
+            form.addEventListener('submit', function (e) {
+                updateRequiredFromState(); // ensure latest state before validating
+            
+                if (!form.checkValidity()) {
+                    e.preventDefault();
+                    form.reportValidity();
+                } else {
+                    alert('Success! Form submitted.');
+                }
+            });
         });
-    } else {
-        // Remove required when hidden
-        toggleInputs.forEach(input => {
-            input.removeAttribute('required');
-        });
-    }
-
-    // Validate form
-    console.log(form.checkValidity());
-    if (!form.checkValidity()) {
-        e.preventDefault();
-        form.reportValidity();
-    } else {
-        alert('Success! Form submitted.');
-    }
-});
-</script>
+        </script>
     </body>
 </html>
