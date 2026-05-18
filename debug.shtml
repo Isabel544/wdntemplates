@@ -669,77 +669,75 @@
       <h2 class="dcf-mt-6">Profile Toggle</h2>
       <div class="dcf-mt-6 dcf-mb-6">
         <form class="dcf-form" action="?" method="post">
-                <fieldset>
-                    <div class="dcf-form-group">
-                        <label for="helpful_comments">Comments</label>
-                        <textarea id="helpful_comments" cols="60" rows="5"></textarea>
-                    </div>
-
-                    <div class="dcf-form-group">
-                        <button
-                            class="dcf-profile-toggle dcf-btn dcf-btn-primary"
-                            data-controls="profile-toggle-div"
-                            data-label-on="Open Profile Toggle Div"
-                            data-label-off="Close Profile Toggle Div"
-                            data-start-expanded="false"
-                        >
-                            Required If Toggled
-                        </button>
-                        <fieldset id="profile-toggle-div">
-                            <legend>Required Content</legend>            
-                            <div class="dcf-form-group">
-                                <label for="name">
-                                    Name 
-                                    <small class="dcf-required">Required</small>
-                                </label>
-                                <input id="name" type="text" data-required="false" >
-                            </div>          
-                            
-                            <fieldset class="dcf-form-group dcf-d-flex dcf-flex-col">
-                                <legend class="dcf-legend">Checkboxes</legend>
-                                <div class="dcf-input-checkbox">
-                                    <input id="elements-form-checkboxA" type="checkbox"                             value="0" aria-labelledby="elements-form-checkboxA-label">
-                                    <label for="elements-form-checkboxA"                            id="elements-form-checkboxA-label">Checkbox A</label>
-                                </div>
-                                <div class="dcf-input-checkbox">
-                                    <input id="elements-form-checkboxB" type="checkbox"                             
-                                    value="1" aria-labelledby="elements-form-checkboxB-label"                           disabled="">
-                                    <label for="elements-form-checkboxB"                            id="elements-form-checkboxB-label">Checkbox B</label>
-                                </div>
-                                <div class="dcf-input-checkbox">
-                                    <input id="elements-form-checkboxC" type="checkbox"                             
-                                    value="2" aria-labelledby="elements-form-checkboxC-label">
-                                    <label for="elements-form-checkboxC"                            id="elements-form-checkboxC-label">Checkbox C</label>
-                                </div>
-                            </fieldset>
-
-                            <button
-                                class="dcf-profile-toggle dcf-btn dcf-btn-primary"
-                                data-controls="nested-profile-toggle-div"
-                                data-label-on="Open Profile Toggle Div"
-                                data-label-off="Close Profile Toggle Div"
-                                data-start-expanded="false"
-                            >
-                                Required If Toggled 2
-                            </button>
-                            <fieldset id="nested-profile-toggle-div">
-                                <legend>Required Nested Content</legend>            
-                                <div class="dcf-form-group">
-                                    <label for="email">
-                                        Email 
-                                        <small class="dcf-required">Required</small>
-                                    </label>
-                                    <input id="email" type="email" data-required="false" >
-                                </div>
-                            </fieldset>
-
+          <fieldset>
+              <div class="dcf-form-group">
+                  <label for="helpful_comments">Comments</label>
+                  <textarea id="helpful_comments" cols="60" rows="5"></textarea>
+              </div>
+              
+              <div class="dcf-form-group">
+                  <button
+                      class="dcf-profile-toggle dcf-btn dcf-btn-primary"
+                      data-controls="profile-toggle-div"
+                      data-label-on="Open Profile Toggle Div"
+                      data-label-off="Close Profile Toggle Div"
+                      data-start-expanded="false"
+                  >
+                      Required If Toggled
+                  </button>
+                  <fieldset id="profile-toggle-div">
+                      <legend>Required Content</legend>            
+                      <div class="dcf-form-group">
+                          <label for="name">
+                              Name 
+                              <small class="dcf-required">Required</small>
+                          </label>
+                          <input id="name" type="text" data-required="false" >
+                      </div>          
+                      
+                      <fieldset class="dcf-form-group dcf-d-flex dcf-flex-col">
+                          <legend class="dcf-legend">Checkboxes</legend>
+                          <div class="dcf-input-checkbox">
+                              <input id="elements-form-checkboxA" type="checkbox"                             value="0" aria-labelledby="elements-form-checkboxA-label">
+                              <label for="elements-form-checkboxA"                            id="elements-form-checkboxA-label">Checkbox A</label>
+                          </div>
+                          <div class="dcf-input-checkbox">
+                              <input id="elements-form-checkboxB" type="checkbox"                             
+                              value="1" aria-labelledby="elements-form-checkboxB-label"                           disabled="">
+                              <label for="elements-form-checkboxB"                            id="elements-form-checkboxB-label">Checkbox B</label>
+                          </div>
+                          <div class="dcf-input-checkbox">
+                              <input id="elements-form-checkboxC" type="checkbox"                             
+                              value="2" aria-labelledby="elements-form-checkboxC-label">
+                              <label for="elements-form-checkboxC"                            id="elements-form-checkboxC-label">Checkbox C</label>
+                          </div>
+                      </fieldset>
+                      <button
+                          class="dcf-profile-toggle dcf-btn dcf-btn-primary"
+                          data-controls="nested-profile-toggle-div"
+                          data-label-on="Open Profile Toggle Div"
+                          data-label-off="Close Profile Toggle Div"
+                          data-start-expanded="false"
+                      >
+                          Required If Toggled 2
+                      </button>
+                      <fieldset id="nested-profile-toggle-div">
+                          <legend>Required Nested Content</legend>            
+                          <div class="dcf-form-group">
+                              <label for="email">
+                                  Email 
+                                  <small class="dcf-required">Required</small>
+                              </label>
+                              <input id="email" type="email" data-required="false" >
+                          </div>
                         </fieldset>
-                    </div>
-                </fieldset>
-                <input class="dcf-btn dcf-btn-primary" name="submit" type="submit" value="Submit">
-            </form>
-            *Note: Submission is possible without filling in required fields 
-            as long as toggle is not in expanded form
+                  </fieldset>
+              </div>
+          </fieldset>
+          <input class="dcf-btn dcf-btn-primary" name="submit" type="submit" value="Submit">
+        </form>
+        *Note: Submission is possible without filling in required fields 
+        as long as toggle is not in expanded form
         <!-- <div id="my-div">
           My First Div
         </div>
