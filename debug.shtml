@@ -664,7 +664,7 @@
         </button>
       </div>
 
-      <h2 class="dcf-mt-6">Profile Toggle</h2>
+      <h2 class="dcf-mt-6">Optional Toggle</h2>
       <div class="dcf-mt-6 dcf-mb-6">
         <form class="dcf-form" action="?" method="post">
           <fieldset>
@@ -675,15 +675,15 @@
               <div class="dcf-form-group">
                   <button
                       type="button"
-                      class="dcf-profile-toggle dcf-btn dcf-btn-primary"
-                      data-controls="profile-toggle-div"
-                      data-label-on="Open Profile Toggle Div"
-                      data-label-off="Close Profile Toggle Div"
+                      class="dcf-optional-toggle dcf-btn dcf-btn-primary"
+                      data-controls="optional-toggle-div"
+                      data-label-on="Open Optional Toggle Div"
+                      data-label-off="Close Optional Toggle Div"
                       data-start-expanded="false"
                   >
                       Required If Toggled
                   </button>
-                  <fieldset id="profile-toggle-div">
+                  <fieldset id="optional-toggle-div">
                       <legend>Required Content</legend>            
                       <div class="dcf-form-group">
                           <label for="name">
@@ -711,15 +711,15 @@
                       </fieldset>
                       <button
                           type="button"
-                          class="dcf-profile-toggle dcf-btn dcf-btn-primary"
-                          data-controls="nested-profile-toggle-div"
-                          data-label-on="Open Profile Toggle Div"
-                          data-label-off="Close Profile Toggle Div"
+                          class="dcf-optional-toggle dcf-btn dcf-btn-primary"
+                          data-controls="nested-optional-toggle-div"
+                          data-label-on="Open Optional Toggle Div"
+                          data-label-off="Close Optional Toggle Div"
                           data-start-expanded="false"
                       >
                           Required If Toggled 2
                       </button>
-                      <fieldset id="nested-profile-toggle-div">
+                      <fieldset id="nested-optional-toggle-div">
                           <legend>Required Nested Content</legend>            
                           <div class="dcf-form-group">
                               <label for="email">
@@ -736,19 +736,6 @@
         </form>
         *Note: Submission is possible without filling in required fields 
         as long as toggle is not in expanded form
-        <!-- <div id="my-div">
-          My First Div
-        </div>
-
-        <button
-          class="dcf-profile-toggle dcf-btn dcf-btn-primary"
-          data-controls="my-div"
-          data-label-on="Open My First Div"
-          data-label-off="Close My First Div"
-          data-start-expanded="true"
-        >
-          Toggle My First Div (Starts On)
-        </button> -->
       </div>
 
 

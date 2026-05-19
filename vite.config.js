@@ -111,7 +111,7 @@ export default ({ mode }) => {
 
                     'plugins/plugin.tab'                  : 'wdn/templates_6.0/js-src/plugins/multi/tab.js',
                     'plugins/plugin.toggle-button'        : 'wdn/templates_6.0/js-src/plugins/multi/toggle-button.js',
-                    'plugins/plugin.profile-toggle'       : 'wdn/templates_6.0/js-src/plugins/multi/profile-toggle.js',
+                    'plugins/plugin.optional-toggle'      : 'wdn/templates_6.0/js-src/plugins/multi/optional-toggle.js',
                     'plugins/plugin.collapsible-fieldset' : 'wdn/templates_6.0/js-src/plugins/multi/collapsible-fieldset.js',
                     'plugins/plugin.figcaption-toggle'    : 'wdn/templates_6.0/js-src/plugins/multi/figcaption-toggle.js',
                     'plugins/plugin.notice'               : 'wdn/templates_6.0/js-src/plugins/multi/notice.js',
@@ -140,7 +140,7 @@ export default ({ mode }) => {
 
                     'components/component.tab'                  : 'wdn/templates_6.0/js-src/components/unl-tab.js',
                     'components/component.toggle-button'        : 'wdn/templates_6.0/js-src/components/unl-toggle-button.js',
-                    'components/component.profile-toggle'       : 'wdn/templates_6.0/js-src/components/unl-profile-toggle.js',
+                    'components/component.optional-toggle'      : 'wdn/templates_6.0/js-src/components/unl-optional-toggle.js',
                     'components/component.collapsible-fieldset' : 'wdn/templates_6.0/js-src/components/unl-collapsible-fieldset.js',
                     'components/component.figcaption-toggle'    : 'wdn/templates_6.0/js-src/components/unl-figcaption-toggle.js',
                     'components/component.notice'               : 'wdn/templates_6.0/js-src/components/unl-notice.js',

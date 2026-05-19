@@ -1,6 +1,6 @@
 import UNLTabUrl from '@js-src/plugins/multi/tab.js?finalUrl';
 import UNLToggleButtonUrl from '@js-src/plugins/multi/toggle-button.js?finalUrl';
-import UNLProfileToggleUrl from '@js-src/plugins/multi/profile-toggle.js?finalUrl';
+import UNLOptionalToggleUrl from '@js-src/plugins/multi/optional-toggle.js?finalUrl';
 import UNLCollapsibleFieldsetUrl from '@js-src/plugins/multi/collapsible-fieldset.js?finalUrl';
 import UNLFigcaptionToggleUrl from '@js-src/plugins/multi/figcaption-toggle.js?finalUrl';
 import UNLNoticeUrl from '@js-src/plugins/multi/notice.js?finalUrl';
@@ -45,12 +45,12 @@ window.UNL.autoLoader = {
                 onPluginLoadedElement: null,
                 url: UNLToggleButtonUrl,
             },
-            UNLProfileToggle: {
+            UNLOptionalToggle: {
                 optOutSelector: null,
                 optInSelector: null,
                 customConfig: {},
                 onPluginLoadedElement: null,
-                url: UNLProfileToggleUrl,
+                url: UNLOptionalToggleUrl,
             },
             UNLCollapsibleFieldset: {
                 optOutSelector: null,

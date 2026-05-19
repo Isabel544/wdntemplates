@@ -1,14 +1,14 @@
-import profileToggleCssUrl from '@scss/components-js/_button-toggles.scss?url';
+import optionalToggleCssUrl from '@scss/components-js/_button-toggles.scss?url';
 import { loadStyleSheet } from '@js-src/lib/unl-utility.js';
 
 /**
  * This is where the imported class will be stored
- * @type {?UNLProfileToggle} UNLProfileToggle
+ * @type {?UNLOptionalToggle} UNLOptionalToggle
  */
-let UNLProfileToggle = null;
+let UNLOptionalToggle = null;
 
 // Query Selector for the tabs component
-const querySelector = '.dcf-profile-toggle:not(.dcf-profile-toggle-initialized)';
+const querySelector = '.dcf-optional-toggle:not(.dcf-optional-toggle-initialized)';
 
 // Type of plugin
 const pluginType = 'multi';
@@ -65,7 +65,7 @@ export function getIsInitialized() {
 export async function initialize() {
     // If already initialized, return the class directly (synchronous)
     if (isInitialized) {
-        return UNLProfileToggle;
+        return UNLOptionalToggle;
     }
 
     // If initialization is in progress, return the existing promise
@@ -75,23 +75,23 @@ export async function initialize() {
 
     // Start new initialization
     initializationPromise = (async() => {
-        const toggleProfileComponent = await import('@js-src/components/unl-profile-toggle.js');
-        UNLProfileToggle = toggleProfileComponent.default;
-        await loadStyleSheet(profileToggleCssUrl);
+        const toggleOptionalComponent = await import('@js-src/components/unl-optional-toggle.js');
+        UNLOptionalToggle = toggleOptionalComponent.default;
+        await loadStyleSheet(optionalToggleCssUrl);
 
         isInitialized = true;
 
         document.dispatchEvent(new CustomEvent('UNLPluginInitialized', {
             detail: {
                 pluginType: pluginType,
-                pluginComponent: UNLProfileToggle,
+                pluginComponent: UNLOptionalToggle,
                 styleSheetsLoaded: [
-                    profileToggleCssUrl,
+                    optionalToggleCssUrl,
                 ],
             },
         }));
 
-        return UNLProfileToggle;
+        return UNLOptionalToggle;
     })();
 
     return initializationPromise;
@@ -101,14 +101,14 @@ export async function initialize() {
  * Loads a single instance of the component
  * @param { HTMLElement } element The element to initialize
  * @param { Object } options optional parameters to pass in when loading the element
- * @returns { Promise<UNLProfileToggle> }
+ * @returns { Promise<UNLOptionalToggle> }
  */
 export async function loadElement(element, options) {
     if (!isInitialized) {
         await initialize();
     }
 
-    const loadedElement = new UNLProfileToggle(element, options);
+    const loadedElement = new UNLOptionalToggle(element, options);
     document.dispatchEvent(new CustomEvent('UNLPluginLoadedElement', {
         detail: {
             loadedElement: loadedElement,
@@ -123,7 +123,7 @@ export async function loadElement(element, options) {
  * @async
  * @param { HTMLCollectionOf<HTMLElement> | HTMLElement[] } elements 
  * @param { Object } options optional parameters to pass in when loading the element
- * @returns { Promise<UNLProfileToggle[]> }
+ * @returns { Promise<UNLOptionalToggle[]> }
  */
 export async function loadElements(elements, options) {
     const loadedElements = await Promise.all(
@@ -136,9 +136,9 @@ export async function loadElements(elements, options) {
  * Using the `querySelector` we will load all elements on the page
  * @async
  * @param { Object } options optional parameters to pass in when loading the element
- * @returns { Promise<UNLProfileToggle[]> }
+ * @returns { Promise<UNLOptionalToggle[]> }
  */
 export async function loadElementsOnPage(options) {
-    const allToggleProfiles = document.querySelectorAll(querySelector);
-    return await loadElements(allToggleProfiles, options);
+    const allToggleOptional = document.querySelectorAll(querySelector);
+    return await loadElements(allToggleOptional, options);
 }
