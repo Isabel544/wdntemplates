@@ -37,8 +37,8 @@
                                     <small class="dcf-required">Required</small>
                                 </label>
                                 <input id="name" type="text" data-required="false" >
-                            </div>          
-                            
+                            </div>
+
                             <fieldset class="dcf-form-group dcf-d-flex dcf-flex-col">
                                 <legend class="dcf-legend">Checkboxes</legend>
                                 <div class="dcf-input-checkbox">
@@ -109,8 +109,8 @@
         
             // Store all toggle ids are stored
             const toggleSections = {};
-            const toggleButtons = document.querySelectorAll('.dcf-profile-toggle');
-        
+            // const toggleButtons = document.querySelectorAll('.dcf-profile-toggle');
+
             toggleButtons.forEach(button => {
                 const targetId = button.dataset.controls;
                 const section = document.getElementById(targetId);
@@ -131,7 +131,7 @@
                     clearSection(section); // important difference
                 });
             });
-        
+
             // Attach required attributes without intefering with nested ones
             function updateSection(section) {
                 const inputs = section.querySelectorAll('[data-required]');
@@ -144,7 +144,7 @@
                     input.setAttribute('required', '');
                 });
             }
-        
+
             // Remove required attribute from everything when parent is closed
             function clearSection(section) {
                 const inputs = section.querySelectorAll('[data-required]');
@@ -167,7 +167,7 @@
                     clearSection(section);
                 }
             });
-        
+
             form.addEventListener('submit', function (e) {
                 if (!form.checkValidity()) {
                     e.preventDefault();
